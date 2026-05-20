@@ -1,32 +1,48 @@
 import type { Pokemon } from '../types/pokemon';
 
-interface Props {
+interface PokemonCardProps {
   pokemon: Pokemon;
+  isFavorite: boolean;
 }
 
-export const PokemonCard = ({ pokemon }: Props) => {
+export const PokemonCard = ({ pokemon, isFavorite }: PokemonCardProps) => {
   return (
-    <div className="pokemon-card" style={{
-      border: '1px solid #ccc',
-      borderRadius: '8px',
-      padding: '10px',
+    <div style={{
+      backgroundColor: '#f5f5f5',
+      borderRadius: '10px',
+      padding: '15px',
       textAlign: 'center',
-      cursor: 'pointer',
-      backgroundColor: '#f9f9f9'
+      color: '#333',
+      position: 'relative'
     }}>
+      
+      {isFavorite && (
+        <span style={{ 
+          position: 'absolute', 
+          top: '5px', 
+          right: '8px', 
+          fontSize: '18px',
+          color: '#f1c40f' 
+        }}>
+          ★
+        </span>
+      )}
+
       <img 
         src={pokemon.image} 
         alt={pokemon.name} 
-        style={{ width: '120px', height: '120px' }} 
+        style={{ width: '80px', height: '80px' }} 
       />
-      <h3 style={{ textTransform: 'capitalize' }}>{pokemon.name}</h3>
-      <div>
-        {pokemon.types.map(type => (
-          <span key={type} style={{ 
-            margin: '0 5px', 
-            padding: '2px 8px', 
-            borderRadius: '4px', 
-            background: '#e0e0e0',
+      <h3 style={{ textTransform: 'capitalize', margin: '10px 0 5px 0' }}>
+        {pokemon.name}
+      </h3>
+      
+      <div style={{ display: 'flex', gap: '5px', justifyContent: 'center' }}>
+        {pokemon.types.map((type) => (
+          <span key={type} style={{
+            backgroundColor: '#ddd',
+            padding: '2px 6px',
+            borderRadius: '4px',
             fontSize: '12px'
           }}>
             {type}
